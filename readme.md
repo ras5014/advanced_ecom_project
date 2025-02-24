@@ -65,6 +65,9 @@ npm i --save-dev @types/cors @types/helmet @types/morgan @types/winston
 ```
 - Setup cors & helmet
 - Setup logging with winston & morgan (setup winston inside src/utils/logger.ts)
-## 6. Setup error handling middlewares
+## 6. Setup common responses inside src/utils/responses.ts
+- successResponse
+- errorResponse
+## 7. Setup error handling middlewares
 - errorHandler
 - notFoundHandler
