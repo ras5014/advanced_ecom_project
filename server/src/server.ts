@@ -3,6 +3,11 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import logger from "./utils/logger";
+import { notFound } from "./middlewares/notFound";
+import { errorHandler } from "./middlewares/errorHandler";
+
+// Import Routes
+import usersRoute from "./routes/users.route";
 
 const app = express();
 
@@ -28,16 +33,18 @@ app.use(
 );
 
 // Routes middlewares
+app.use("/api/v1", usersRoute);
 
 // Error handling middleware
-
+app.use(errorHandler);
 // Not found middleware
+app.use(notFound);
 
 const PORT = process.env.PORT || 8080;
 app
   .listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    logger.info(`Server is running on http://localhost:${PORT}`);
   })
   .on("error", (err) => {
-    console.error(err);
+    logger.error(err.message);
   });

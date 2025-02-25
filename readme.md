@@ -22,6 +22,7 @@ npm i express
     "isolatedModules": true, // Required for using ESM modules
     "baseUrl": ".", // Allow absolute imports relative to project root
     "paths": {
+      "src/*": ["./src/*"],
       "*": ["node_modules/*"]
     }
   }
@@ -68,6 +69,141 @@ npm i --save-dev @types/cors @types/helmet @types/morgan @types/winston
 ## 6. Setup common responses inside src/utils/responses.ts
 - successResponse
 - errorResponse
+```ts
+import { Response } from "express";
+
+export const successResponse = (
+  res: Response,
+  data: any,
+  statusCode: number = 200,
+  message: string = "Request was successful"
+) => {
+  res.status(statusCode).json({
+    success: true,
+    message,
+    data,
+  });
+};
+
+export const errorResponse = (
+  res: Response,
+  statusCode: number = 500,
+  message: string = "An error occurred"
+) => {
+  res.status(statusCode).json({
+    success: false,
+    message,
+  });
+};
+
+```
 ## 7. Setup error handling middlewares
 - errorHandler
+```ts
+import { errorResponse } from "../utils/responses.js";
+import { NextFunction, Request, Response } from "express";
+import { fromError } from "zod-validation-error";
+
+type ErrorWithStatus = Error & { status?: number };
+
+export const errorHandler = (
+  err: ErrorWithStatus,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const statusCode = err.status || 500;
+  const message = err.message || "Internal Server Error";
+
+  // You can handle all types of errors here
+  // Handle Prisma errors
+  if (err.name === "PrismaClientKnownRequestError") {
+    return errorResponse(res, 400, "Database operation failed");
+  }
+
+  if (err.name === "PrismaClientValidationError") {
+    return errorResponse(res, 400, "Invalid data provided");
+  }
+
+  // Handle Zod validation errors
+  if (err.name === "ZodError") {
+    const validationError = fromError(err);
+    return errorResponse(
+      res,
+      400,
+      validationError.toString() || "Validation failed"
+    );
+  }
+
+  errorResponse(res, statusCode, message);
+};
+
+```
 - notFoundHandler
+```ts
+import { errorResponse } from "../utils/responses.js";
+import { Response, Request } from "express";
+
+export const notFound = (req: Request, res: Response) => {
+  return errorResponse(res, 404, "Not Found");
+};
+
+```
+
+## 8. Final Server code (src/server.ts)
+```ts
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
+import logger from "./utils/logger";
+import { notFound } from "./middlewares/notFound";
+import { errorHandler } from "./middlewares/errorHandler";
+
+const app = express();
+
+// Default middlewares
+app.use(cors());
+app.use(helmet());
+app.use(express.json());
+const morganFormat = ":method :url :status :response-time ms";
+app.use(
+  morgan(morganFormat, {
+    stream: {
+      write: (message: string) => {
+        const logObject = {
+          method: message.split(" ")[0],
+          url: message.split(" ")[1],
+          status: message.split(" ")[2],
+          responseTime: message.split(" ")[3],
+        };
+        logger.info(JSON.stringify(logObject));
+      },
+    },
+  })
+);
+
+// Routes middlewares
+
+// Error handling middleware
+app.use(errorHandler);
+// Not found middleware
+app.use(notFound);
+
+const PORT = process.env.PORT || 8080;
+app
+  .listen(PORT, () => {
+    logger.info(`Server is running on http://localhost:${PORT}`);
+  })
+  .on("error", (err) => {
+    logger.error(err.message);
+  });
+
+```
+## 9. Always Keep a models, controllers, routes, services, utils folder structure
+## 10. Make Notes about 
+- errorHandler middleware for custom errors
+- zod schemas for validation
+- Make notes on how authentication and authorization are done (Add photos)
+- How to use jsonwebtoken for authentication (Token generation while login)
+- How to use passport for authentication

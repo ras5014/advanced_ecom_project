@@ -1,0 +1,44 @@
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T14:27:59.463Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T14:28:00.309Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T14:31:25.967Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T14:31:31.611Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T14:32:22.004Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/register\",\"status\":\"201\",\"responseTime\":\"148.930\"}","timestamp":"2025-02-25T14:35:30.673Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/register\",\"status\":\"409\",\"responseTime\":\"2.336\"}","timestamp":"2025-02-25T14:35:37.133Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/register\",\"status\":\"400\",\"responseTime\":\"1.290\"}","timestamp":"2025-02-25T14:36:36.941Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/register\",\"status\":\"409\",\"responseTime\":\"2.282\"}","timestamp":"2025-02-25T14:36:48.086Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/register\",\"status\":\"409\",\"responseTime\":\"1.426\"}","timestamp":"2025-02-25T14:36:59.989Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/register\",\"status\":\"409\",\"responseTime\":\"1.276\"}","timestamp":"2025-02-25T14:37:08.869Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/register\",\"status\":\"201\",\"responseTime\":\"88.669\"}","timestamp":"2025-02-25T14:37:19.666Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T14:38:11.739Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:04:15.608Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:04:16.295Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:04:59.963Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:05:44.461Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:05:45.075Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:09:23.536Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:09:45.042Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:13:15.802Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:22:45.648Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:22:56.411Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:24:40.317Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:25:06.239Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/login\",\"status\":\"200\",\"responseTime\":\"113.942\"}","timestamp":"2025-02-25T15:26:16.136Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:26:16.920Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/login\",\"status\":\"200\",\"responseTime\":\"92.460\"}","timestamp":"2025-02-25T15:26:27.619Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:39:47.709Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T15:39:48.911Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T18:20:17.615Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T18:20:18.244Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T18:43:13.359Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/login\",\"status\":\"200\",\"responseTime\":\"189.075\"}","timestamp":"2025-02-25T18:43:20.533Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T18:43:21.531Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/login\",\"status\":\"200\",\"responseTime\":\"133.107\"}","timestamp":"2025-02-25T18:43:27.997Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T18:55:15.914Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/protected\",\"status\":\"200\",\"responseTime\":\"20.710\"}","timestamp":"2025-02-25T18:56:04.350Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/protected\",\"status\":\"401\",\"responseTime\":\"2.629\"}","timestamp":"2025-02-25T18:56:19.645Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/protected\",\"status\":\"200\",\"responseTime\":\"6.502\"}","timestamp":"2025-02-25T18:56:25.608Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T18:56:41.716Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T18:56:43.130Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T18:57:13.957Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Server is running on http://localhost:8080","timestamp":"2025-02-25T18:57:15.188Z"}
