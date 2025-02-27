@@ -8,6 +8,8 @@ import { generateToken } from "src/utils/generateToken";
  * @throws {ErrorWithStatus} Error with HTTP status code if user already exists
  * @param {UserRegister} data User data to be registered
  * @returns {Promise<User>} Registered User
+ * @route
+ * @access Public
  */
 export const registerUser = async (data: UserRegister) => {
   const { fullname, email, password } = data;
