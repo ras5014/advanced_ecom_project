@@ -203,6 +203,63 @@ app
 ## 9. Always Keep a models, controllers, routes, services, utils folder structure
 ## 10. Make Notes about 
 - errorHandler middleware for custom errors
+```ts
+Global Error Handling Middleware
+import { errorResponse } from "../utils/responses.js";
+import { NextFunction, Request, Response } from "express";
+import { fromError } from "zod-validation-error";
+
+type ErrorWithStatus = Error & { status?: number };
+
+export const errorHandler = (
+  err: ErrorWithStatus,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const statusCode = err.status || 500;
+  const message = err.message || "Internal Server Error";
+  errorResponse(res, statusCode, message);
+};
+
+Setting Custom Errors
+Register User Service
+export const registerUser = async (data: UserRegister) => {
+  const { fullname, email, password } = data;
+  // Check if user exists
+  const userExists = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+  if (userExists) throw { status: 409, message: "User already exists" };
+  // Hash User Password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  // Create User
+  const user = await prisma.user.create({
+    data: {
+      fullname,
+      email,
+      password: hashedPassword,
+    },
+  });
+};
+// Register User Controller
+const registerUserCtrl = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const data = req.body;
+    const user = await registerUser(data); // Here the error will be generated and it will go to catch error section
+    successResponse(res, user, 201, "User created successfully");
+  } catch (error) {
+    next(error);
+  }
+};
+```
 - zod schemas for validation
 - Make notes on how authentication and authorization are done (Add photos)
 - How to use jsonwebtoken for authentication (Token generation while login)
