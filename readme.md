@@ -201,8 +201,8 @@ app
 
 ```
 ## 9. Always Keep a models, controllers, routes, services, utils folder structure
-## 10. Make Notes about 
-- errorHandler middleware for custom errors
+## 10. errorHandler middleware for custom errors
+
 ```ts
 Global Error Handling Middleware
 import { errorResponse } from "../utils/responses.js";
@@ -260,7 +260,127 @@ const registerUserCtrl = async (
   }
 };
 ```
-- zod schemas for validation
-- Make notes on how authentication and authorization are done (Add photos)
-- How to use jsonwebtoken for authentication (Token generation while login)
-- How to use passport for authentication
+## 11. zod schemas for validation
+### 1. Prepare the schema (schema/user.schema.ts)
+```ts
+import { z } from "zod";
+
+export const UserSchema = z.object({
+  fullname: z
+    .string()
+    .min(3, `Fullname must be at least 3 characters`)
+    .max(30, `Fullname must be less than 30 characters`),
+  email: z.string().email(`Invalid email address`),
+  password: z.string().min(6, `Password must be at least 6 characters`),
+  role: z.enum(["USER", "ADMIN"]),
+  hasShippingAddress: z.boolean(),
+});
+
+export const UserRegisterSchema = z.object({
+  fullname: UserSchema.shape.fullname,
+  email: UserSchema.shape.email,
+  password: UserSchema.shape.password,
+});
+
+export const UserLoginSchema = z.object({
+  email: UserSchema.shape.email,
+  password: UserSchema.shape.password,
+});
+
+export type User = z.infer<typeof UserSchema>;
+export type UserRegister = z.infer<typeof UserRegisterSchema>;
+export type UserLogin = z.infer<typeof UserLoginSchema>;
+
+```
+### 2. Use the schema in services as type
+```ts
+export const registerUser = async (data: UserRegister) => {
+  const { fullname, email, password } = data;
+  // Check if user exists
+  const userExists = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+  if (userExists) throw { status: 409, message: "User already exists" };
+  // Hash User Password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  // Create User
+  const user = await prisma.user.create({
+    data: {
+      fullname,
+      email,
+      password: hashedPassword,
+    },
+  });
+};
+```
+### 3. Make a validateSchema middleware
+```bash
+npm i zod zod-validation-error
+```
+- zod-validation-error is a library that helps us to get the error message from the zod schema
+```ts
+import { Request, Response, NextFunction } from "express";
+import { AnyZodObject } from "zod";
+
+export const validateSchema = (schema: AnyZodObject) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await schema.parseAsync(req.body);
+      next();
+    } catch (error) {
+      next(error);
+    }
+  };
+};
+
+```
+### 4. Use the middleware locally in routes
+```ts
+router
+  .post("/register", validateSchema(UserRegisterSchema), registerUserCtrl)
+```
+### 5. Handle zod errors in errorHandling middleware
+```ts
+import { errorResponse } from "../utils/responses.js";
+import { NextFunction, Request, Response } from "express";
+import { fromError } from "zod-validation-error";
+
+type ErrorWithStatus = Error & { status?: number };
+export const errorHandler = (
+  err: ErrorWithStatus,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const statusCode = err.status || 500;
+  const message = err.message || "Internal Server Error";
+  // Handle Prisma errors
+  if (err.name === "PrismaClientKnownRequestError") {
+    return errorResponse(res, 400, "Database operation failed");
+  }
+
+  if (err.name === "PrismaClientValidationError") {
+    return errorResponse(res, 400, "Invalid data provided");
+  }
+
+  // Handle Zod validation errors
+  if (err.name === "ZodError") {
+    const validationError = fromError(err);
+    return errorResponse(
+      res,
+      400,
+      validationError.toString() || "Validation failed"
+    );
+  }
+
+  errorResponse(res, statusCode, message);
+};
+
+```
+## 12. Authentication & Authorization
+### 1. Make notes on how authentication and authorization are done (Add photos)
+### 2. How to use jsonwebtoken for authentication (Token generation while login)
+### 3. How to use passport for authentication
