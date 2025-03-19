@@ -384,3 +384,4 @@ export const errorHandler = (
 ### 1. Make notes on how authentication and authorization are done (Add photos)
 ### 2. How to use jsonwebtoken for authentication (Token generation while login)
 ### 3. How to use passport for authentication
+### 4. Using rate limiting to prevent brute force attacks & DDOS attacks (Auth)
