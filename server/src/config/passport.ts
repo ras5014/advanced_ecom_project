@@ -7,6 +7,11 @@ const opts = {
   secretOrKey: process.env.JWT_SECRET,
 };
 
+// Make sure to check if JWT_SECRET exists
+if (!opts.secretOrKey) {
+  throw new Error("JWT_SECRET is not defined in environment variables");
+}
+
 passport.use(
   new JwtStrategy(opts, async (jwt_payload: any, done: any) => {
     try {

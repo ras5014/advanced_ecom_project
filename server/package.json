@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-    "dev": "tsx --watch src/server.ts"
+    "dev": "tsx --watch --env-file .env src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -25,11 +25,14 @@
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
     "helmet": "^8.0.0",
+    "ioredis": "^5.6.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
+    "rate-limit-redis": "^4.2.0",
     "winston": "^3.17.0",
     "zod": "^3.24.2",
     "zod-validation-error": "^3.4.0"

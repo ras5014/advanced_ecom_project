@@ -5,6 +5,7 @@ import morgan from "morgan";
 import logger from "./utils/logger";
 import { notFound } from "./middlewares/notFound";
 import { errorHandler } from "./middlewares/errorHandler";
+import { limiter } from "./middlewares/limiter";
 
 // Import Routes
 import usersRoute from "./routes/users.route";
@@ -15,6 +16,10 @@ const app = express();
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
+
+// Rate limiter middleware
+app.use(limiter);
+
 const morganFormat = ":method :url :status :response-time ms";
 app.use(
   morgan(morganFormat, {
